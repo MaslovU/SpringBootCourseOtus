@@ -2,10 +2,19 @@ package com.maslov.homeworkboot.service.impl;
 
 import com.maslov.homeworkboot.domain.Quiz;
 import com.maslov.homeworkboot.service.Examinator;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+
+import java.util.Locale;
 
 @Service
 public class ExaminatorQuiz implements Examinator {
+
+    MessageSource messages;
+
+    public ExaminatorQuiz(MessageSource messages) {
+        this.messages = messages;
+    }
 
     @Override
     public void askQuestion(Quiz quiz) {
@@ -17,12 +26,12 @@ public class ExaminatorQuiz implements Examinator {
 
     @Override
     public void askFirstName() {
-        System.out.println("What is your firstName?");
+        System.out.println(getMessage("properties.name"));
     }
 
     @Override
     public void askLastName() {
-        System.out.println("What is your lastName?");
+        System.out.println(getMessage("properties.lastName"));
     }
 
     @Override
@@ -32,6 +41,10 @@ public class ExaminatorQuiz implements Examinator {
 
     @Override
     public String getResult(String name, String lastName, int res) {
-        return "Student " + name + " " + lastName + " has " + res + " right answers";
+        return getMessage("student") + " " + name + " " + lastName + " " + getMessage("rightAnswers") +  " " + res;
+    }
+
+    private String getMessage(String key) {
+        return messages.getMessage(key, null, Locale.getDefault());
     }
 }
