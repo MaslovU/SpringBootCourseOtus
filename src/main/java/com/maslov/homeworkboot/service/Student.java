@@ -3,13 +3,13 @@ package com.maslov.homeworkboot.service;
 import java.io.IOException;
 
 public interface Student {
-    int getAnswer() throws IOException;
+    int getAnswer() ;
 
-    void setFirstName() throws IOException;
+    void setFirstName();
 
     String getFirstName();
 
-    void setLastName() throws IOException;
+    void setLastName();
 
     String getLastName();
 }

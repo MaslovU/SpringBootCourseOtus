@@ -8,8 +8,8 @@ import com.maslov.homeworkboot.service.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -28,19 +28,22 @@ public class QuizMasterImpl implements QuizMaster {
     }
 
     @Override
-    public void startQuiz() throws IOException {
+    public void startQuiz() {
         List<Quiz> resList = questionDao.getQuiz();
 
-        try {
+        do {
             examinator.askFirstName();
             student.setFirstName();
+
+        } while (student.getFirstName().isEmpty());
+
+        do {
             examinator.askLastName();
             student.setLastName();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String firstName = student.getFirstName();
-        String lastName = student.getLastName();
+        } while (student.getLastName().isEmpty());
+
+        String firstName = student.getFirstName().equals("") ? "defaultFirstName" : student.getFirstName();
+        String lastName = student.getLastName().equals("") ? "defaultLastName" : student.getLastName();
         for (var el : resList) {
             examinator.askQuestion(el);
 
