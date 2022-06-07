@@ -34,7 +34,6 @@ public class QuizMasterImpl implements QuizMaster {
         do {
             examinator.askFirstName();
             student.setFirstName();
-
         } while (student.getFirstName().isEmpty());
 
         do {

@@ -1,6 +1,6 @@
 package com.maslov.homeworkboot.service.impl;
 
-import com.maslov.homeworkboot.exceptions.StupidUserException;
+import com.maslov.homeworkboot.exceptions.QuizException;
 import com.maslov.homeworkboot.service.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,9 +23,10 @@ public class StudentQuiz implements Student {
                 System.out.println("Enter your answer: ");
                 return Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine());
             } catch (NumberFormatException e) {
-                System.out.println("Enter number, please. Try again");
+                log.warn("Enter number, please. Try again");
             } catch (IOException e) {
-                log.warn("Could not get data from user");
+                log.error("Could not get data from user");
+                throw new QuizException("Could not get data from user");
             }
         }
     }
@@ -38,8 +39,8 @@ public class StudentQuiz implements Student {
         try {
             this.name = new BufferedReader(new InputStreamReader(System.in)).readLine();
         } catch (IOException e) {
-            log.warn("Could not get firstName from user! Try again");
-            throw new StupidUserException("Could not get firstName from user");
+            log.error("Could not get firstName from user! Try again");
+            throw new QuizException("Could not get firstName from user");
         }
     }
 
@@ -51,8 +52,8 @@ public class StudentQuiz implements Student {
         try {
             this.lastName = new BufferedReader(new InputStreamReader(System.in)).readLine();
         } catch (IOException e) {
-            log.warn("Could not get lastName from user");
-            throw new StupidUserException("Could not get lastName from user");
+            log.error("Could not get lastName from user");
+            throw new QuizException("Could not get lastName from user");
         }
     }
 }
