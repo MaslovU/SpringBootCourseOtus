@@ -1,27 +1,26 @@
 package com.maslov.homeworkboot.service.impl;
 
 import com.maslov.homeworkboot.domain.Quiz;
-import com.maslov.homeworkboot.service.Examinator;
+import com.maslov.homeworkboot.service.ExaminatorQuiz;
 import com.maslov.homeworkboot.service.QuestionList;
 import com.maslov.homeworkboot.service.QuizMaster;
-import com.maslov.homeworkboot.service.Student;
+import com.maslov.homeworkboot.service.StudentQuiz;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
 public class QuizMasterImpl implements QuizMaster {
 
     private final QuestionList questionDao;
-    private final Examinator examinator;
-    private final Student student;
+    private final ExaminatorQuiz examinator;
+    private final StudentQuiz student;
 
     private int counter;
 
-    public QuizMasterImpl(QuestionList questionList, Examinator examinator, Student student) {
+    public QuizMasterImpl(QuestionList questionList, ExaminatorQuiz examinator, StudentQuiz student) {
         this.questionDao = questionList;
         this.examinator = examinator;
         this.student = student;

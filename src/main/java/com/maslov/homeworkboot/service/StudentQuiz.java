@@ -2,7 +2,7 @@ package com.maslov.homeworkboot.service;
 
 import java.io.IOException;
 
-public interface Student {
+public interface StudentQuiz {
     int getAnswer() ;
 
     void setFirstName();

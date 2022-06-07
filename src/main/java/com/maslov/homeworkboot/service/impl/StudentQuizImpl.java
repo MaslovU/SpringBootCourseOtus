@@ -1,7 +1,7 @@
 package com.maslov.homeworkboot.service.impl;
 
 import com.maslov.homeworkboot.exceptions.QuizException;
-import com.maslov.homeworkboot.service.Student;
+import com.maslov.homeworkboot.service.StudentQuiz;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 @Service
 @Slf4j
-public class StudentQuiz implements Student {
+public class StudentQuizImpl implements StudentQuiz {
 
     private String name;
     private String lastName;

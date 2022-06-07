@@ -2,7 +2,7 @@ package com.maslov.homeworkboot.service;
 
 import com.maslov.homeworkboot.domain.Quiz;
 
-public interface Examinator {
+public interface ExaminatorQuiz {
     void askQuestion(Quiz resList);
 
     void askFirstName();
