@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 
 @Service
 public class StudentQuiz implements Student {
+
     private String name;
     private String lastName;
 

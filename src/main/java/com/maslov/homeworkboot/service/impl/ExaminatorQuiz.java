@@ -12,6 +12,9 @@ public class ExaminatorQuiz implements Examinator {
 
     MessageSource messages;
 
+    private static final String FIRST_NAME= "properties.name";
+    private static final String LAST_NAME = "properties.lastName";
+
     public ExaminatorQuiz(MessageSource messages) {
         this.messages = messages;
     }
@@ -26,12 +29,12 @@ public class ExaminatorQuiz implements Examinator {
 
     @Override
     public void askFirstName() {
-        System.out.println(getMessage("properties.name"));
+        System.out.println(getMessage(FIRST_NAME));
     }
 
     @Override
     public void askLastName() {
-        System.out.println(getMessage("properties.lastName"));
+        System.out.println(getMessage(LAST_NAME));
     }
 
     @Override

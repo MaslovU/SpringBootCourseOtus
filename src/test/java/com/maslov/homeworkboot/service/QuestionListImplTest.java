@@ -1,6 +1,6 @@
 package com.maslov.homeworkboot.service;
 
-import com.maslov.homeworkboot.dao.DataHandler;
+import com.maslov.homeworkboot.dao.impl.DataHandlerImpl;
 import com.maslov.homeworkboot.domain.Quiz;
 import com.maslov.homeworkboot.service.impl.QuestionListImpl;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class QuestionListImplTest {
 
     @MockBean
-    private DataHandler handler;
+    private DataHandlerImpl handler;
 
     @Autowired
     private QuestionList questionList;

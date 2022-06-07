@@ -1,7 +1,10 @@
-package com.maslov.homeworkboot.dao;
+package com.maslov.homeworkboot.dao.impl;
 
+import com.maslov.homeworkboot.config.QuizConfiguration;
+import com.maslov.homeworkboot.dao.DataHandle;
 import com.maslov.homeworkboot.service.ResourceAsStream;
 import com.maslov.homeworkboot.service.impl.ResourceAsStreamImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
@@ -12,22 +15,19 @@ import java.util.Locale;
 import java.util.Scanner;
 
 @Service
-public class DataHandler {
+@RequiredArgsConstructor
+public class DataHandlerImpl implements DataHandle {
 
-    private static String csvPath;
+    private final QuizConfiguration configuration;
     private Locale locale;
-    private String language;
     private static final String DELIMITER = ",";
-
-    public DataHandler(@Value("${csv.path.en}") String csvPathEn,
-                       @Value("${csv.path.ru}") String csvPathRu,
-                       @Value("${language}") String language) {
-        this.language = language;
-        defineLocale();
-        csvPath = locale.getLanguage().equals("en") ? csvPathEn : csvPathRu;
-    }
+    private static final String EN_LANGUAGE = "en";
 
     public List<String[]> getResourceAsStream() {
+        String csvPathEn = configuration.getCsvPathEn();
+        String csvPathRu = configuration.getCsvPathRu();
+        defineLocale();
+        String csvPath = locale.getLanguage().equals("en") ? csvPathEn : csvPathRu;
         List<String[]> list = new ArrayList();
         ResourceAsStream resourceAsStream = new ResourceAsStreamImpl();
 
@@ -40,7 +40,8 @@ public class DataHandler {
     }
 
     private void defineLocale() {
-         if (language.equals("en")) {
+        String language = configuration.getLanguage();
+         if (language.equals(EN_LANGUAGE)) {
             locale = Locale.ENGLISH;
         } else if (language.isEmpty()) {
             locale = LocaleContextHolder.getLocale();

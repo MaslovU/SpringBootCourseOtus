@@ -1,6 +1,6 @@
 package com.maslov.homeworkboot.service.impl;
 
-import com.maslov.homeworkboot.dao.DataHandler;
+import com.maslov.homeworkboot.dao.impl.DataHandlerImpl;
 import com.maslov.homeworkboot.domain.Quiz;
 import com.maslov.homeworkboot.service.QuestionList;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 public class QuestionListImpl implements QuestionList {
     @Autowired
-    private DataHandler handler;
+    private DataHandlerImpl handler;
 
     @Override
     public List<Quiz> getQuiz() {
