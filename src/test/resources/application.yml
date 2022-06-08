@@ -1,0 +1,6 @@
+csv:
+  path:
+    en: questions.csv
+    ru: questions-ru.csv
+
+language:
