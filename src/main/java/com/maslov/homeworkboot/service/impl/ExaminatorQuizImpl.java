@@ -1,21 +1,21 @@
 package com.maslov.homeworkboot.service.impl;
 
 import com.maslov.homeworkboot.domain.Quiz;
-import com.maslov.homeworkboot.service.Examinator;
+import com.maslov.homeworkboot.service.ExaminatorQuiz;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
 
 @Service
-public class ExaminatorQuiz implements Examinator {
+public class ExaminatorQuizImpl implements ExaminatorQuiz {
 
     MessageSource messages;
 
     private static final String FIRST_NAME= "properties.name";
     private static final String LAST_NAME = "properties.lastName";
 
-    public ExaminatorQuiz(MessageSource messages) {
+    public ExaminatorQuizImpl(MessageSource messages) {
         this.messages = messages;
     }
 
