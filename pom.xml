@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.maslov</groupId>
     <artifactId>otusSpringBootHome</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>otusSpringBootHome</name>
     <description>otusSpringBootHome</description>
     <properties>
