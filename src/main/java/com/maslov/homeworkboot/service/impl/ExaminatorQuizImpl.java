@@ -21,10 +21,10 @@ public class ExaminatorQuizImpl implements ExaminatorQuiz {
 
     @Override
     public void askQuestion(Quiz quiz) {
-        System.out.println(quiz.getQuestion());
-        System.out.println(quiz.getAnswer1());
-        System.out.println(quiz.getAnswer2());
-        System.out.println(quiz.getAnswer3());
+        System.out.println(getQuestion(quiz));
+        System.out.println(getAnswer1(quiz));
+        System.out.println(getAnswer2(quiz));
+        System.out.println(getAnswer3(quiz));
     }
 
     @Override
@@ -49,5 +49,21 @@ public class ExaminatorQuizImpl implements ExaminatorQuiz {
 
     private String getMessage(String key) {
         return messages.getMessage(key, null, Locale.getDefault());
+    }
+
+    private String getQuestion(Quiz quiz) {
+        return quiz.getQuestion();
+    }
+
+    private String getAnswer1(Quiz quiz) {
+        return quiz.getAnswer1();
+    }
+
+    private String getAnswer2(Quiz quiz) {
+        return quiz.getAnswer2();
+    }
+
+    private String getAnswer3(Quiz quiz) {
+        return quiz.getAnswer3();
     }
 }
