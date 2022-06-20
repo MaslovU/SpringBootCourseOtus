@@ -9,7 +9,7 @@ import java.util.Locale;
 @Service
 public class MessageSeviceImpl implements MessageService {
 
-    MessageSource messages;
+    private final MessageSource messages;
 
     public MessageSeviceImpl(MessageSource messages) {
         this.messages = messages;
@@ -18,5 +18,9 @@ public class MessageSeviceImpl implements MessageService {
     @Override
     public String getMessage(String key) {
         return messages.getMessage(key, null, Locale.getDefault());
+    }
+
+    public String getMessage(String name, String lastName, String res) {
+        return String.join(" ", getMessage("student"), name, lastName, getMessage("rightAnswers"), res);
     }
 }

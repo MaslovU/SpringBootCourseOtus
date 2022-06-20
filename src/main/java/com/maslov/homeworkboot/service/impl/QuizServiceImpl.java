@@ -25,4 +25,9 @@ public class QuizServiceImpl implements QuizService {
     public String getAnswer3(Quiz quiz) {
         return quiz.getAnswer3();
     }
+
+    @Override
+    public int getRightValue(Quiz quiz) {
+        return quiz.getRightValue();
+    }
 }
