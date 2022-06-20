@@ -1,6 +1,5 @@
 package com.maslov.homeworkboot.service;
 
-import com.maslov.homeworkboot.dao.DataHandle;
 import com.maslov.homeworkboot.domain.Quiz;
 import com.maslov.homeworkboot.service.impl.ExaminatorQuizImpl;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +29,10 @@ class ExaminatorQuizImplTest {
     private Quiz quiz;
 
     @MockBean
-    DataHandle dataHandle;
+    private QuizService quizService;
+
+    @MockBean
+    private MessageService messageService;
 
     @MockBean
     private MessageSource messageSource;
@@ -43,10 +46,10 @@ class ExaminatorQuizImplTest {
 
         examinatorQuiz.askQuestion(quiz);
 
-        verify(quiz, Mockito.times(1)).getQuestion();
-        verify(quiz, Mockito.times(1)).getAnswer1();
-        verify(quiz, Mockito.times(1)).getAnswer2();
-        verify(quiz, Mockito.times(1)).getAnswer3();
+        verify(quiz, Mockito.times(0)).getQuestion();
+        verify(quiz, Mockito.times(0)).getAnswer1();
+        verify(quiz, Mockito.times(0)).getAnswer2();
+        verify(quiz, Mockito.times(0)).getAnswer3();
     }
 
     @Test
@@ -55,8 +58,10 @@ class ExaminatorQuizImplTest {
 
         String expString = "студент Y M дал правильных ответов 3";
 
-        when(messageSource.getMessage("student", null, Locale.getDefault())).thenReturn("студент");
-        when(messageSource.getMessage("rightAnswers", null, Locale.getDefault())).thenReturn("дал правильных ответов");
+        when(messageService.getMessage("student")).thenReturn("студент");
+        when(messageService.getMessage("rightAnswers")).thenReturn("дал правильных ответов");
+        when(messageService.getMessage(anyString(), anyString(), anyString()))
+                .thenReturn("студент Y M дал правильных ответов 3");
 
         String res = examinatorQuiz.getResult("Y", "M", 3);
 
@@ -67,7 +72,7 @@ class ExaminatorQuizImplTest {
     @Description("check checkAnswer method true")
     void test3() {
 
-        when(quiz.getRightValue()).thenReturn(3);
+        when(quizService.getRightValue(quiz)).thenReturn(3);
 
         boolean res = examinatorQuiz.checkAnswer(3, quiz);
 
@@ -91,7 +96,8 @@ class ExaminatorQuizImplTest {
 
         examinatorQuiz.askFirstName();
 
-        verify(messageSource, Mockito.times(1)).getMessage(PROPERTIES_MANE, null, Locale.getDefault());
+        verify(messageService, Mockito.times(1)).getMessage(anyString());
+        verify(messageSource, Mockito.times(0)).getMessage(PROPERTIES_MANE, null, Locale.getDefault());
 
     }
 }
