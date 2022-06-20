@@ -2,6 +2,8 @@ package com.maslov.homeworkboot.service.impl;
 
 import com.maslov.homeworkboot.domain.Quiz;
 import com.maslov.homeworkboot.service.ExaminatorQuiz;
+import com.maslov.homeworkboot.service.MessageService;
+import com.maslov.homeworkboot.service.QuizService;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +12,15 @@ import java.util.Locale;
 @Service
 public class ExaminatorQuizImpl implements ExaminatorQuiz {
 
-    MessageSource messages;
+    MessageService messageService;
+    QuizService quizService;
 
     private static final String FIRST_NAME= "properties.name";
     private static final String LAST_NAME = "properties.lastName";
 
-    public ExaminatorQuizImpl(MessageSource messages) {
-        this.messages = messages;
+    public ExaminatorQuizImpl(MessageService messageService, QuizService quizService) {
+        this.messageService = messageService;
+        this.quizService = quizService;
     }
 
     @Override
@@ -48,22 +52,22 @@ public class ExaminatorQuizImpl implements ExaminatorQuiz {
     }
 
     private String getMessage(String key) {
-        return messages.getMessage(key, null, Locale.getDefault());
+        return messageService.getMessage(key);
     }
 
     private String getQuestion(Quiz quiz) {
-        return quiz.getQuestion();
+        return quizService.getQuestion(quiz);
     }
 
     private String getAnswer1(Quiz quiz) {
-        return quiz.getAnswer1();
+        return quizService.getAnswer1(quiz);
     }
 
     private String getAnswer2(Quiz quiz) {
-        return quiz.getAnswer2();
+        return quizService.getAnswer2(quiz);
     }
 
     private String getAnswer3(Quiz quiz) {
-        return quiz.getAnswer3();
+        return quizService.getAnswer3(quiz);
     }
 }
