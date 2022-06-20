@@ -4,18 +4,15 @@ import com.maslov.homeworkboot.domain.Quiz;
 import com.maslov.homeworkboot.service.ExaminatorQuiz;
 import com.maslov.homeworkboot.service.MessageService;
 import com.maslov.homeworkboot.service.QuizService;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-
-import java.util.Locale;
 
 @Service
 public class ExaminatorQuizImpl implements ExaminatorQuiz {
 
-    MessageService messageService;
-    QuizService quizService;
+    private final MessageService messageService;
+    private final QuizService quizService;
 
-    private static final String FIRST_NAME= "properties.name";
+    private static final String FIRST_NAME = "properties.name";
     private static final String LAST_NAME = "properties.lastName";
 
     public ExaminatorQuizImpl(MessageService messageService, QuizService quizService) {
@@ -43,12 +40,12 @@ public class ExaminatorQuizImpl implements ExaminatorQuiz {
 
     @Override
     public boolean checkAnswer(int guess, Quiz quiz) {
-        return guess == quiz.getRightValue();
+        return guess == quizService.getRightValue(quiz);
     }
 
     @Override
     public String getResult(String name, String lastName, int res) {
-        return getMessage("student") + " " + name + " " + lastName + " " + getMessage("rightAnswers") +  " " + res;
+        return messageService.getMessage(name, lastName, String.valueOf(res));
     }
 
     private String getMessage(String key) {
