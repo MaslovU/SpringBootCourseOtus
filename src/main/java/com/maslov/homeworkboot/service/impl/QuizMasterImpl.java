@@ -40,8 +40,6 @@ public class QuizMasterImpl implements QuizMaster {
             student.setLastName();
         } while (student.getLastName().isEmpty());
 
-        String firstName = student.getFirstName().equals("") ? "defaultFirstName" : student.getFirstName();
-        String lastName = student.getLastName().equals("") ? "defaultLastName" : student.getLastName();
         for (var el : resList) {
             examinator.askQuestion(el);
 
@@ -51,7 +49,15 @@ public class QuizMasterImpl implements QuizMaster {
                 counter++;
             }
         }
+        System.out.println("If you want get your result enter command: res");
+    }
+
+    @Override
+    public void getResult() {
+        String firstName = student.getFirstName();
+        String lastName = student.getLastName();
         System.out.println(examinator.getResult(firstName, lastName, counter));
         log.info("Student {} {} has {} right result", firstName, lastName, counter);
+        System.out.println("If you want start new quiz enter command s");
     }
 }

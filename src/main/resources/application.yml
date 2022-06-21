@@ -4,3 +4,11 @@ csv:
     ru: questions-ru.csv
 
 language:
+
+spring:
+  main:
+    allow-circular-references: true
+
+  shell:
+    interactive:
+      enabled: true
